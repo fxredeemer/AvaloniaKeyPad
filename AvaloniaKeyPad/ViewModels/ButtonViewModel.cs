@@ -2,18 +2,20 @@
 
 namespace AvaloniaKeyPad.ViewModels
 {
-    public interface IButtonViewModel : IButton { }
+    public interface IButtonViewModel : IButton
+    {
+        IButton Button { get; }
+    }
 
     public class ButtonViewModel : ViewModelBase, IButtonViewModel
     {
-        private readonly Button button;
+        public IButton Button { get; }
+        public string Name => Button.Name;
+        public string Description => Button.Description;
 
-        public string Name => button.Name;
-        public string Description => button.Description;
-
-        public ButtonViewModel(Button button)
+        public ButtonViewModel(IButton button)
         {
-            this.button = button;
+            this.Button = button;
         }
     }
 }
