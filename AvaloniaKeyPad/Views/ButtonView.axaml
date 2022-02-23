@@ -5,6 +5,11 @@
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              x:Class="AvaloniaKeyPad.Views.ButtonView">
 	<Grid>
-		<Label Content="{Binding Property}"/>
+		<Grid.ColumnDefinitions>
+			<ColumnDefinition Width="*"/>
+			<ColumnDefinition Width="3*"/>
+		</Grid.ColumnDefinitions>
+		<Label Grid.Column="0" Content="{Binding Name}"/>
+		<Label Grid.Column="1" Content="{Binding Description}"/>
 	</Grid>
 </UserControl>

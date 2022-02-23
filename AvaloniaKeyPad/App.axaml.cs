@@ -1,6 +1,7 @@
 using Avalonia;
 using Avalonia.Controls.ApplicationLifetimes;
 using Avalonia.Markup.Xaml;
+using AvaloniaKeyPad.Models;
 using AvaloniaKeyPad.ViewModels;
 using AvaloniaKeyPad.Views;
 using Microsoft.Extensions.DependencyInjection;
@@ -17,9 +18,10 @@ namespace AvaloniaKeyPad
         public override void OnFrameworkInitializationCompleted()
         {
             var services = new ServiceCollection()
-                 .AddSingleton<IMenuViewModel, MenuViewModel>()
-                 .AddScoped<IButtonViewModel, ButtonViewModel>()
-                 .AddSingleton<MainWindowViewModel>();
+                .AddSingleton<IDataRepository, DataRepository>()
+                .AddSingleton<IMenuViewModel, MenuViewModel>()
+                .AddScoped<IButtonViewModel, ButtonViewModel>()
+                .AddSingleton<MainWindowViewModel>();
 
             var serviceProvider = services.BuildServiceProvider();
 
