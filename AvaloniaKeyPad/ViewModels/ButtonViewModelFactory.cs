@@ -10,6 +10,13 @@ namespace AvaloniaKeyPad.ViewModels
 
     public class ButtonViewModelFactory : IButtonViewModelFactory
     {
+        private readonly IActionViewModelFactory actionViewModelFactory;
+
+        public ButtonViewModelFactory(IActionViewModelFactory actionViewModelFactory)
+        {
+            this.actionViewModelFactory = actionViewModelFactory;
+        }
+
         public IButtonViewModel GetButtonViewModel(IButton button)
         {
             return new ButtonViewModel(button);
@@ -22,7 +29,7 @@ namespace AvaloniaKeyPad.ViewModels
                 return null;
             }
 
-            return new SelectedButtonViewModel(button);
+            return new SelectedButtonViewModel(actionViewModelFactory, button);
         }
     }
 }

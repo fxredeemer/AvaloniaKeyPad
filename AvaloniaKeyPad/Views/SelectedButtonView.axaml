@@ -4,12 +4,14 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              x:Class="AvaloniaKeyPad.Views.SelectedButtonView">
-    <TabControl >
-        <TabItem Header="Button">
-            qeqwoieqoiuzeoqiu
-        </TabItem>
-        <TabItem Header="Key Combination">
-            ADHSAJHASKJHDAS
-        </TabItem>
-    </TabControl>
+    <DockPanel LastChildFill="True" Margin="4">
+        <DockPanel DockPanel.Dock="Bottom" Margin="4">
+            <Button>Save</Button>
+        </DockPanel>
+        <StackPanel>
+            <Label>Mode</Label>
+            <ComboBox Items="{Binding ActionModes}" SelectedItem="{Binding SelectedActionMode}"></ComboBox>
+            <ContentControl Content="{Binding ActionViewModel}"/>
+        </StackPanel>
+    </DockPanel>
 </UserControl>
