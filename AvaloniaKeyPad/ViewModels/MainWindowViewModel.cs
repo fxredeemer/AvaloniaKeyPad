@@ -7,10 +7,11 @@ namespace AvaloniaKeyPad.ViewModels
 {
     public class MainWindowViewModel : ViewModelBase
     {
+        private readonly IButtonViewModelFactory buttonViewModelFactory;
         private readonly IDataRepository dataRepository;
         private IButtonViewModel? selectedButton;
 
-        public IEnumerable<IButtonViewModel> Buttons => dataRepository.Buttons.Select(d => new ButtonViewModel(d));
+        public IEnumerable<IButtonViewModel> Buttons => dataRepository.Buttons.Select(d => buttonViewModelFactory.GetButtonViewModel(d));
         public IMenuViewModel Menu { get; }
         public IStatusBarViewModel StatusBar { get; }
 
@@ -20,24 +21,17 @@ namespace AvaloniaKeyPad.ViewModels
             set => this.RaiseAndSetIfChanged(ref selectedButton, value);
         }
 
-        public ISelectedButtonViewModel? ButtonDetailView
-        {
-            get
-            {
-                if (selectedButton == null)
-                {
-                    return null;
-                }
-                return new SelectedButtonViewModel(selectedButton.Button);
-            }
-        }
+        public ISelectedButtonViewModel? ButtonDetailView => buttonViewModelFactory.GetSelectedButtonViewModel(selectedButton?.Button);
 
         public MainWindowViewModel(
             IMenuViewModel menuViewModel,
             IStatusBarViewModel statusBarViewModel,
+            IButtonViewModelFactory buttonViewModelFactory,
             IDataRepository dataRepository)
         {
             this.dataRepository = dataRepository;
+            this.buttonViewModelFactory = buttonViewModelFactory;
+
             Menu = menuViewModel;
             StatusBar = statusBarViewModel;
 
