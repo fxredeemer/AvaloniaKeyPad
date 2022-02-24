@@ -2,7 +2,7 @@
 
 namespace AvaloniaKeyPad.ViewModels
 {
-    public interface IButtonViewModel : IButton
+    public interface IButtonViewModel
     {
         IButton Button { get; }
     }

@@ -7,14 +7,10 @@
         x:Class="AvaloniaKeyPad.Views.MainWindow"
         Icon="/Assets/avalonia-logo.ico"
         Title="AvaloniaKeyPad">
-
-    <Design.DataContext>
-        <vm:MainWindowViewModel/>
-    </Design.DataContext>
-
 	<DockPanel>
 		<ContentControl DockPanel.Dock="Top" Content="{Binding Menu}"/>
 		<ListBox DockPanel.Dock="Left" Items="{Binding Buttons}" SelectedItem="{Binding SelectedButton}"/>
+    <ContentControl DockPanel.Dock="Bottom" Content="{Binding StatusBar}"/>
 		<ContentControl Content="{Binding ButtonDetailView}"/>
 	</DockPanel>
 </Window>

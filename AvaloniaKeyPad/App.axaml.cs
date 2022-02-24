@@ -21,6 +21,7 @@ namespace AvaloniaKeyPad
                 .AddSingleton<IDataRepository, DataRepository>()
                 .AddSingleton<IMenuViewModel, MenuViewModel>()
                 .AddScoped<IButtonViewModel, ButtonViewModel>()
+                .AddScoped<IStatusBarViewModel, StatusBarViewModel>()
                 .AddSingleton<MainWindowViewModel>();
 
             var serviceProvider = services.BuildServiceProvider();

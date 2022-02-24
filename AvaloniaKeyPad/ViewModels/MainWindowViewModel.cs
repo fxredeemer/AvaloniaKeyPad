@@ -10,25 +10,38 @@ namespace AvaloniaKeyPad.ViewModels
         private readonly IDataRepository dataRepository;
         private IButtonViewModel? selectedButton;
 
-        public IMenuViewModel Menu { get; }
         public IEnumerable<IButtonViewModel> Buttons => dataRepository.Buttons.Select(d => new ButtonViewModel(d));
+        public IMenuViewModel Menu { get; }
+        public IStatusBarViewModel StatusBar { get; }
+
         public IButtonViewModel? SelectedButton
         {
             get => selectedButton;
             set => this.RaiseAndSetIfChanged(ref selectedButton, value);
         }
 
-        public ISelectedButtonViewModel? ButtonDetailView { get; set; }
+        public ISelectedButtonViewModel? ButtonDetailView
+        {
+            get
+            {
+                if (selectedButton == null)
+                {
+                    return null;
+                }
+                return new SelectedButtonViewModel(selectedButton.Button);
+            }
+        }
 
         public MainWindowViewModel(
             IMenuViewModel menuViewModel,
+            IStatusBarViewModel statusBarViewModel,
             IDataRepository dataRepository)
         {
-            Menu = menuViewModel;
             this.dataRepository = dataRepository;
+            Menu = menuViewModel;
+            StatusBar = statusBarViewModel;
 
             this.WhenAnyValue(d => d.SelectedButton)
-                .WhereNotNull()
                 .ToProperty(this, nameof(ButtonDetailView));
         }
     }
