@@ -3,18 +3,9 @@ using ReactiveUI;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace AvaloniaKeyPad.ViewModels
 {
-    public enum ActionMode
-    {
-        TextAction,
-        ButtonAction
-    }
-
-
     public interface ISelectedButtonViewModel
     {
         string Identifier { get; }
@@ -26,22 +17,30 @@ namespace AvaloniaKeyPad.ViewModels
     public class SelectedButtonViewModel : ViewModelBase, ISelectedButtonViewModel
     {
         private readonly IActionViewModelFactory actionViewModelFactory;
+        private ActionMode selectedActionMode;
 
         public IButton Button { get; }
         public string Identifier => Button.Name;
 
-        public IActionViewModel ActionViewModel => actionViewModelFactory.GetTextActionViewModel();
+        public IActionViewModel ActionViewModel => actionViewModelFactory.GetActionViewModel(SelectedActionMode);
 
-        public IEnumerable<ActionMode> ActionModes => Enum.GetValues<ActionMode>();
+        public IEnumerable<ActionMode> ActionModes { get; }
 
-        public ActionMode SelectedActionMode { get ; set; } = ActionMode.TextAction;
+        public ActionMode SelectedActionMode
+        {
+            get => selectedActionMode;
+            set => this.RaiseAndSetIfChanged(ref selectedActionMode, value);
+        }
 
         public SelectedButtonViewModel(
             IActionViewModelFactory actionViewModelFactory,
             IButton button)
         {
             this.actionViewModelFactory = actionViewModelFactory;
+
             Button = button;
+            ActionModes = actionViewModelFactory.GetAvailableActions();
+            SelectedActionMode = ActionModes.First();
 
             this.WhenAnyValue(d => d.SelectedActionMode)
                 .ToProperty(this, nameof(ActionViewModel));
