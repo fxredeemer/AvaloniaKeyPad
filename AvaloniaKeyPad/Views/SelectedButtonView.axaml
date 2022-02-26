@@ -5,8 +5,9 @@
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              x:Class="AvaloniaKeyPad.Views.SelectedButtonView">
     <DockPanel LastChildFill="True" Margin="4">
-        <DockPanel DockPanel.Dock="Bottom" Margin="4">
-            <Button>Save</Button>
+        <DockPanel DockPanel.Dock="Bottom" LastChildFill="True" Margin="4">
+            <Button DockPanel.Dock="Right">Save</Button>
+            <Label/>
         </DockPanel>
         <StackPanel>
             <Label>Mode</Label>
