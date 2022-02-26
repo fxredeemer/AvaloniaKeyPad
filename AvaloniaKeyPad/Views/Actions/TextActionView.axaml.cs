@@ -2,7 +2,7 @@ using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Markup.Xaml;
 
-namespace AvaloniaKeyPad.Views
+namespace AvaloniaKeyPad.Views.Actions
 {
     public partial class TextActionView : UserControl
     {

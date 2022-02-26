@@ -1,4 +1,4 @@
-﻿namespace AvaloniaKeyPad.ViewModels
+﻿namespace AvaloniaKeyPad.ViewModels.Actions
 {
     public interface ITextActionViewModel : IActionViewModel
     {

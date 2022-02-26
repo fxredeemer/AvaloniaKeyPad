@@ -3,6 +3,7 @@ using Avalonia.Controls.ApplicationLifetimes;
 using Avalonia.Markup.Xaml;
 using AvaloniaKeyPad.Models;
 using AvaloniaKeyPad.ViewModels;
+using AvaloniaKeyPad.ViewModels.Actions;
 using AvaloniaKeyPad.Views;
 using Microsoft.Extensions.DependencyInjection;
 

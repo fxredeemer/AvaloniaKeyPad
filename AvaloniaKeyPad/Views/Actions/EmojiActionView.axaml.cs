@@ -2,11 +2,11 @@ using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Markup.Xaml;
 
-namespace AvaloniaKeyPad.Views
+namespace AvaloniaKeyPad.Views.Actions
 {
-    public partial class ButtonActionView : UserControl
+    public partial class EmojiActionView : UserControl
     {
-        public ButtonActionView()
+        public EmojiActionView()
         {
             InitializeComponent();
         }

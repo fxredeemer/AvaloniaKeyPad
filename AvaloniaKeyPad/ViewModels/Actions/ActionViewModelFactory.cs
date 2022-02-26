@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 
-namespace AvaloniaKeyPad.ViewModels
+namespace AvaloniaKeyPad.ViewModels.Actions
 {
     public interface IActionViewModelFactory
     {

@@ -1,4 +1,4 @@
-﻿namespace AvaloniaKeyPad.ViewModels
+﻿namespace AvaloniaKeyPad.ViewModels.Actions
 {
     public enum ActionMode
     {
