@@ -1,15 +1,14 @@
-﻿using DynamicData.Binding;
+﻿using Avalonia.Input;
+using DynamicData.Binding;
 using ReactiveUI;
-using System;
-using System.Windows.Input;
 
 namespace AvaloniaKeyPad.ViewModels.Actions
 {
     public interface IButtonActionViewModel : IActionViewModel
     {
         public string ButtonText { get; }
-        public IObservableCollection<string> PressedButtons { get; }
-        public ICommand ListenKeyPress { get; }
+        public IObservableCollection<Key> PressedButtons { get; }
+        void ListenTopKeyPress(Key key);
     }
 
     public class ButtonActionViewModel : ViewModelBase, IButtonActionViewModel
@@ -24,14 +23,10 @@ namespace AvaloniaKeyPad.ViewModels.Actions
             set => this.RaiseAndSetIfChanged(ref isRecording, value);
         }
 
-        public IObservableCollection<string> PressedButtons { get; } = new ObservableCollectionExtended<string>();
-
-        public ICommand ListenKeyPress { get; }
+        public IObservableCollection<Key> PressedButtons { get; } = new ObservableCollectionExtended<Key>();
 
         public ButtonActionViewModel()
         {
-            ListenKeyPress = ReactiveCommand.Create(ListenToKeypress);
-
             this.WhenAnyValue(d => d.IsRecording)
                 .ToProperty(this, nameof(ButtonText));
         }
@@ -39,15 +34,22 @@ namespace AvaloniaKeyPad.ViewModels.Actions
         public bool CanToggleRecording() => !isRecording;
         public void ToggleRecording()
         {
+            if (!isRecording)
+            {
+                PressedButtons.Clear();
+            }
+
             IsRecording = !IsRecording;
         }
 
-        private void ListenToKeypress()
+        public void ListenTopKeyPress(Key key)
         {
             if (isRecording)
             {
-
-
+                if (!PressedButtons.Contains(key))
+                {
+                    PressedButtons.Add(key);
+                }
             }
         }
     }

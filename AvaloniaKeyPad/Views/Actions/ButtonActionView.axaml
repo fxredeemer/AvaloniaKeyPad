@@ -7,20 +7,15 @@
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              x:Class="AvaloniaKeyPad.Views.Actions.ButtonActionView">
 
-  <StackPanel>
-    <Label>Click Record and then Press the desired Button(s)</Label>
-    <Label>Stop the recording with "Stop"</Label>
-    <Border x:Name="Border" BorderBrush="DarkGray" BorderThickness="2" Margin="4" Padding="4">
-      <i:Interaction.Behaviors>
-        <ia:EventTriggerBehavior EventName="KeyDown" SourceObject="{Binding #Border}">
-          <ia:InvokeCommandAction Command="{Binding ListenKeyPress}"/>
-        </ia:EventTriggerBehavior>
-      </i:Interaction.Behaviors>
-      <StackPanel>
-        <Button Content="{Binding ButtonText, FallbackValue=Record}" Command="{Binding ToggleRecording}"/>
-        <Label>Pressed Buttons</Label>
-        <ListBox Items="{Binding PressedButtons}"/>
-      </StackPanel>
-    </Border>    
-  </StackPanel>
+    <StackPanel>
+        <Label>Click Record and then Press the desired Button(s)</Label>
+        <Label>Stop the recording with "Stop"</Label>
+        <Border x:Name="Border" BorderBrush="DarkGray" BorderThickness="2" Margin="4" Padding="4" KeyDown="Border_KeyDown">
+            <StackPanel>
+                <Button Content="{Binding ButtonText, FallbackValue=Record}" Command="{Binding ToggleRecording}"/>
+                <Label>Pressed Buttons</Label>
+                <ListBox Items="{Binding PressedButtons}"/>
+            </StackPanel>
+        </Border>
+    </StackPanel>
 </UserControl>
